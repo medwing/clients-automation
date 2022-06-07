@@ -3,7 +3,7 @@ from selenium import webdriver
 from utilities.readProperties import read_config
 from libs.ui_fixtures import UI
 
-config_values = read_config('app_data')
+# config_values = read_config('urls')
 
 
 @pytest.fixture()
@@ -18,7 +18,7 @@ def ui(browser):
         driver = webdriver.Chrome()
 
     driver.maximize_window()
-    driver.get(config_values['baseurl'])
+    # driver.get(url)
     fixtures_ui = UI(driver)
     return fixtures_ui
 

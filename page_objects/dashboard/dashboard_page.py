@@ -1,9 +1,15 @@
-NATIONAL_RECRUITING_BTN_XPATH = "//a[@href='https://clients.mwngdev.com/home']"
-TEMP_MARKETPLACE_BTN_XPATH = "//img[@alt='Temp Marketplace']//following-sibling::a"
-INTERNATIONAL_RECRUITING_XPATH = "//a[@href='https://clients.mwngdev.com/cross-border']"
-INTERNAL_POOLS_BTN_XPATH = "//div[contains(@class, 'ant-row')]/div[4]//a"
-DASHBOARD_HEADING_XPATH = "//div[@data-hypernova-key='ProductSelector']//h1"
-DESCRIPTION_XPATH = "//div[@data-hypernova-key='ProductSelector']//p"
-CONTACT_MESSAGE_XPATH = "//div[@data-hypernova-key='ProductSelector']/div/div[1]/p[2]"
-CONTACT_NUMBER_XPATH = "//div[@data-hypernova-key='ProductSelector']/div/div[1]//a[1]"
-CONTACT_EMAIL_XPATH = "//div[@data-hypernova-key='ProductSelector']/div/div[1]//a[2]"
+from page_objects.dashboard.dashboard_page_locator import *
+from page_objects.national_recruiting.national_recruiting_page_locator import HOME_LINK_XPATH
+from utilities.myselenium_driver import SeleniumDriver
+
+
+class DashboardPage(SeleniumDriver):
+    def __init__(self, ui):
+        super().__init__(ui)
+        self.driver = ui.driver
+
+    def validate_national_recruiting_btn(self):
+        self.wait_for_element_to_be_visible(NATIONAL_RECRUITING_BTN_XPATH, "xpath")
+        self.click_element(NATIONAL_RECRUITING_BTN_XPATH, "xpath")
+        self.wait_for_element_to_be_visible(HOME_LINK_XPATH, "xpath")
+        assert self.get_current_url() == "https://clients.mwngdev.com/home"

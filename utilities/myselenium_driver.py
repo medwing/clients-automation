@@ -1,6 +1,7 @@
 import pytest
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.action_chains import ActionChains
+from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as ec
 from selenium.common.exceptions import *
@@ -100,7 +101,7 @@ class SeleniumDriver:
         else:
             return False
 
-    def wait_for_element(self, locator, locator_type="id",
+    def wait_for_element_to_be_clickable(self, locator, locator_type="id",
                          timeout=20, pollFrequency=0.5):
         by_type = self.get_by_type(locator_type)
         wait = WebDriverWait(self.driver, timeout, poll_frequency=pollFrequency,
@@ -267,3 +268,18 @@ class SeleniumDriver:
         by_type = self.get_by_type(locator_type)
         element = WebDriverWait(self.driver, timer).until(ec.text_to_be_present_in_element((by_type, locator), text))
         return element
+
+    def get_current_url(self):
+        return self.driver.current_url
+
+    def move_to_element(self, locator, locator_type="xpath", element=None):
+        if element is None:
+            element = self.get_element(locator, locator_type)
+            self.wait_for_element_to_be_visible(locator, locator_type)
+            ActionChains(self.driver).move_to_element(element).click().perform()
+        else:
+            ActionChains(self.driver).move_to_element(element).click().perform()
+
+    def clear_element_text(self, text, element):
+        for i in range(len(text)):
+            element.send_keys(Keys.BACK_SPACE)

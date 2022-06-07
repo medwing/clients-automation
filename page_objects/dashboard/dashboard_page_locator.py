@@ -1,0 +1,11 @@
+# Regular ATS Dashboard Page (https://clients.mwngdev.com/start)
+NATIONAL_RECRUITING_BTN_XPATH = "//a[@href='https://clients.mwngdev.com/home']"
+TEMP_MARKETPLACE_BTN_XPATH = "//img[@alt='Temp Marketplace']//following-sibling::a"
+INTERNATIONAL_RECRUITING_XPATH = "//a[@href='https://clients.mwngdev.com/cross-border']"
+INTERNAL_POOLS_BTN_XPATH = "//div[contains(@class, 'ant-row')]/div[4]//a"
+DASHBOARD_HEADING_XPATH = "//div[@data-hypernova-key='ProductSelector']//h1"
+DESCRIPTION_XPATH = "//div[@data-hypernova-key='ProductSelector']//p"
+CONTACT_MESSAGE_XPATH = "//div[@data-hypernova-key='ProductSelector']/div/div[1]/p[2]"
+CONTACT_NUMBER_XPATH = "//div[@data-hypernova-key='ProductSelector']/div/div[1]//a[1]"
+CONTACT_EMAIL_XPATH = "//div[@data-hypernova-key='ProductSelector']/div/div[1]//a[2]"
+LOGOUT_BTN_CSS = ".uninav-user-details > div:nth-child(4) > img"

@@ -1,29 +1,27 @@
-HOME_LINK_XPATH = "//a[@href='home']"
-CANDIDATE_LINK_XPATH = "//a[@href='permanent']"
-VACANCIES_LINK_XPATH = "//a[@href='JOBS']"
-
-# CANDIDATES PAGE
-ALL_BTN_XPATH = "//div[@id='candidates-filter']/span/div[1]/div"
-SUCCESS_BTN_XPATH = "//div[@id='candidates-filter']/span/div[3]/div"
-REJECTED_BTN_XPATH = "//div[@id='candidates-filter']/span/div[4]/div"
-STATUS_DROPDOWN_BTN_XPATH = "//div[@id='candidates-filter']/span/div[2]/button/div/div[2]"
-STATUS_LABEL_XPATH = "//div[@id='candidates-filter']//button[contains(@class, 'ant-dropdown-trigger')]//h3[1]"
-STATUS_COUNT_XPATH = "//div[@id='candidates-filter']//button[contains(@class, 'ant-dropdown-trigger')]//h3[2]"
-SEARCH_TEXT_FIELD = "//input[@name='textSearch']"
-START_DATE_XPATH = "//div[contains(@class, 'ant-picker-range')]/div[1]"
-END_DATE_XPATH = "//div[contains(@class, 'ant-picker-range')]/div[3]"
-FROM_DATE_XPATH = "//div[@class='ant-picker-panels']/div[1]//td[contains(@class, 'in-view')]//div[text()='{0}']"
-TO_DATE_XPATH = "//div[@class='ant-picker-panels']/div[2]//td[contains(@class, 'in-view')]//div[text()='{0}']"
-POSITION_DROPDOWN_XPATH = "//div[@id='filter-wrapper-position']/button"
-POSITION_SEARCH_TEXT_FIELD_XPATH = "//ul[contains(@class, 'ant-dropdown-menu')]//input"
-POSITION_SEARCH_BTN_XPATH = "//ul[contains(@class, 'ant-dropdown-menu')]//button[1]"
-POSITION_CLEAR_TEXT_BTN_XPATH = "//ul[contains(@class, 'ant-dropdown-menu')]//button[2]"
-FACILITY_DROPDOWN_XPATH = "//div[@id='filter-wrapper-facility']/button"
-FACILITY_SEARCH_TEXT_FIELD_XPATH = "//div[@id='filter-wrapper-facility']//input"
-FACILITY_SEARCH_BTN_XPATH = "//div[@id='filter-wrapper-facility']//ul//button[1]"
-FACILITY_CLEAR_TEXT_BTN_XPATH = "//div[@id='filter-wrapper-facility']//ul//button[2]"
-PREVIOUS_PAGE_BTN_XPATH = "//li[contains(@class, 'ant-pagination-prev')]/button"
-NEXT_PAGE_BTN_XPATH = "//li[contains(@class, 'ant-pagination-next')]/button"
+from page_objects.dashboard.dashboard_page_locator import NATIONAL_RECRUITING_BTN_XPATH
+from page_objects.national_recruiting.national_recruiting_page_locator import *
+from utilities.myselenium_driver import SeleniumDriver
 
 
-# VACANCIES PAGE
+class NationalRecruitingPage(SeleniumDriver):
+    def __init__(self, ui):
+        super().__init__(ui)
+        self.driver = ui.driver
+
+    def open_national_recruiting_page(self):
+        self.wait_for_element_to_be_visible(NATIONAL_RECRUITING_BTN_XPATH, "xpath")
+        self.click_element(NATIONAL_RECRUITING_BTN_XPATH, "xpath")
+
+    def validate_side_navigation_bar(self):
+        self.open_national_recruiting_page()
+        self.wait_for_element_to_be_visible(CANDIDATE_LINK_XPATH, "xpath")
+        self.click_element(CANDIDATE_LINK_XPATH, "xpath")
+        assert self.is_element_present(ALL_BTN_XPATH, "xpath")
+
+        self.wait_for_element_to_be_clickable(VACANCIES_LINK_XPATH, "xpath")
+        self.click_element(VACANCIES_LINK_XPATH, "xpath")
+        assert self.is_element_present(ADD_NEW_JOB_BTN_XPATH, "xpath")
+
+        self.wait_for_element_to_be_clickable(HOME_LINK_XPATH, "xpath")
+        self.click_element(HOME_LINK_XPATH, "xpath")
+        assert self.is_element_present(VIEW_ALL_CANDIDATES_BTN_ID, "id")
