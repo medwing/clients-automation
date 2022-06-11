@@ -2,13 +2,16 @@ HOME_LINK_XPATH = "//a[@href='home']"
 CANDIDATE_LINK_XPATH = "//a[@href='permanent']"
 VACANCIES_LINK_XPATH = "//a[@href='jobs']"
 
-
-#HOME PAGE
+# HOME PAGE
 VIEW_ALL_CANDIDATES_BTN_ID = "gtm_tracking_home_view_candidates"
-
 
 # CANDIDATES PAGE
 ALL_BTN_XPATH = "//div[@id='candidates-filter']/span/div[1]/div"
+ALL_FILTER_COUNT_CSS = "div[data-cy-tab-button*='Alle'] h3:nth-child(2)"
+CANDIDATE_COUNT_CSS = ".ant-table-tbody>tr"
+PAGINATION_BTN_COUNT_CSS = ".ant-table-pagination-center li"
+PAGINATION_LAST_BTN_XPATH = "//li[contains(@class, 'ant-pagination-next')]/button/../preceding-sibling::li[1]"
+FILTER_DROPDOWN_VALUE_XPATH = "//body//ul[contains(@class, 'ant-dropdown-menu-vertical')]/li"
 SUCCESS_BTN_XPATH = "//div[@id='candidates-filter']/span/div[3]/div"
 REJECTED_BTN_XPATH = "//div[@id='candidates-filter']/span/div[4]/div"
 STATUS_DROPDOWN_BTN_XPATH = "//div[@id='candidates-filter']/span/div[2]/button/div/div[2]"
@@ -29,7 +32,8 @@ FACILITY_SEARCH_BTN_XPATH = "//div[@id='filter-wrapper-facility']//ul//button[1]
 FACILITY_CLEAR_TEXT_BTN_XPATH = "//div[@id='filter-wrapper-facility']//ul//button[2]"
 PREVIOUS_PAGE_BTN_XPATH = "//li[contains(@class, 'ant-pagination-prev')]/button"
 NEXT_PAGE_BTN_XPATH = "//li[contains(@class, 'ant-pagination-next')]/button"
-
+PREVIOUS_PAGE_BTN_LIST_XPATH = "//li[contains(@class, 'ant-pagination-prev')]"
+NEXT_PAGE_BTN_LIST_XPATH = "//li[contains(@class, 'ant-pagination-next')]"
 
 # VACANCIES PAGE
 ADD_NEW_JOB_BTN_XPATH = "//div[@id='job-create-button']/button"

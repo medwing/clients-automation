@@ -102,7 +102,7 @@ class SeleniumDriver:
             return False
 
     def wait_for_element_to_be_clickable(self, locator, locator_type="id",
-                         timeout=20, pollFrequency=0.5):
+                                         timeout=20, pollFrequency=0.5):
         by_type = self.get_by_type(locator_type)
         wait = WebDriverWait(self.driver, timeout, poll_frequency=pollFrequency,
                              ignored_exceptions=[NoSuchElementException,
@@ -175,7 +175,7 @@ class SeleniumDriver:
         else:
             return False
 
-    def get_column_count(self, locator, locator_type="id"):
+    def get_element_count(self, locator, locator_type="id"):
         element_list = self.get_elements_list(locator, locator_type)
         return len(element_list)
 
@@ -283,3 +283,51 @@ class SeleniumDriver:
     def clear_element_text(self, text, element):
         for i in range(len(text)):
             element.send_keys(Keys.BACK_SPACE)
+
+    # Below methods are for working with browser local storage
+
+    def __len__(self):
+        return self.driver.execute_script("return window.localStorage.length;")
+
+    def get_localstorage_items(self):
+        return self.driver.execute_script(
+            "var ls = window.localStorage, items = {}; ""for (var i = 0, k; i < ls.length; ++i) ""items[k = ls.key("
+            "i)] = ls.getItem(k); ""return items; ")
+
+    def get_keys(self):
+        return self.driver.execute_script(
+            "var ls = window.localStorage, keys = []; ""for (var i = 0; i < ls.length; ++i) ""  keys[i] = ls.key(i); "
+            "return keys; ")
+
+    def get_item_in_localstorage(self, key):
+        return self.driver.execute_script("return window.localStorage.getItem(arguments[0]);", key)
+
+    def set_item_in_localstorage(self, key, value):
+        self.driver.execute_script("window.localStorage.setItem(arguments[0], arguments[1]);", key, value)
+
+    def has_key_in_localstorage(self, key):
+        return key in self.get_keys()
+
+    def remove_item_from_localstorage(self, key):
+        self.driver.execute_script("window.localStorage.removeItem(arguments[0]);", key)
+
+    def clear_localstorage(self):
+        self.driver.execute_script("window.localStorage.clear();")
+
+    def __getitem__(self, key):
+        value = self.get_item_in_localstorage(key)
+        if value is None:
+            raise KeyError(key)
+        return value
+
+    def __setitem__(self, key, value):
+        self.set_item_in_localstorage(key, value)
+
+    def __contains__(self, key):
+        return key in self.get_keys()
+
+    def __iter__(self):
+        return self.get_localstorage_items().__iter__()
+
+    def __repr__(self):
+        return self.get_localstorage_items().__str__()
