@@ -34,6 +34,7 @@ PREVIOUS_PAGE_BTN_XPATH = "//li[contains(@class, 'ant-pagination-prev')]/button"
 NEXT_PAGE_BTN_XPATH = "//li[contains(@class, 'ant-pagination-next')]/button"
 PREVIOUS_PAGE_BTN_LIST_XPATH = "//li[contains(@class, 'ant-pagination-prev')]"
 NEXT_PAGE_BTN_LIST_XPATH = "//li[contains(@class, 'ant-pagination-next')]"
+VIEW_FIRST_CANDIDATE_CARD_ID = "first-introduction-link"
 
 # VACANCIES PAGE
 ADD_NEW_JOB_BTN_XPATH = "//div[@id='job-create-button']/button"

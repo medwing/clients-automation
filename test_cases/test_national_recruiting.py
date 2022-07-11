@@ -42,3 +42,13 @@ def test_candidate_filter_dropdown_check(ui):
         ui.national_recruiting_page.candidate_filter_dropdown()
     finally:
         ui.close()
+
+
+@pytest.mark.regression
+def test_candidate_cards(ui):
+    try:
+        ui.driver.get(config_values['regular_ats_url'])
+        ui.login_page.login(regular_ats_username, regular_ats_password)
+        ui.national_recruiting_page.validate_candidates_card()
+    finally:
+        ui.close()

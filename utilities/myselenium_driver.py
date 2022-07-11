@@ -280,7 +280,8 @@ class SeleniumDriver:
         else:
             ActionChains(self.driver).move_to_element(element).click().perform()
 
-    def clear_element_text(self, text, element):
+    @staticmethod
+    def clear_element_text(text, element):
         for i in range(len(text)):
             element.send_keys(Keys.BACK_SPACE)
 

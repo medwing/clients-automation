@@ -35,8 +35,10 @@ class NationalRecruitingPage(SeleniumDriver):
         self.click_element(HOME_LINK_XPATH, "xpath")
         assert self.is_element_present(VIEW_ALL_CANDIDATES_BTN_ID, "id")
 
-    def validate_candidates_page(self):
-        pass
+    def validate_candidates_card(self):
+        self.open_national_recruiting_page()
+        self.navigate_to_candidates_page()
+        self.click_element(VIEW_FIRST_CANDIDATE_CARD_ID, "ID")
 
     def filter_all(self):
         self.open_national_recruiting_page()
